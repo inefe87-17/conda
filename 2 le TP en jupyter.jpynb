@@ -1,0 +1,268 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def minval(amp,debit):\n",
+    "    #Entrées :\n",
+    "    # amp: amplitude max qu'on souhaite coder\n",
+    "    # debit : 16, 18, 24 : debit binaire, c'est à dire le nombre de bits pour chaque valeur\n",
+    "    # Sortie :\n",
+    "    # minval doit retourner la sensibilité, soit la plus petite différence que l'on peut coder\n",
+    "    \n",
+    "    # A vous de jouer... !\n",
+    "    "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# on va représenter la fonction 100*sin(x) entre -2Pi et +2Pi\n",
+    "# on doit charger les librairies math, numpy, matplotlib et pyplot\n",
+    "\n",
+    "import math as m\n",
+    "import numpy as np\n",
+    "import matplotlib as mpl\n",
+    "import matplotlib.pyplot as plt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# on commence par tracer la fonction sin(x)\n",
+    "# on crée un tableau de valeur pour les abcisses, alleant de -2Pi a 2Pi et on prend 100 points\n",
+    "x=np.linspace(-2*m.pi,2*m.pi,1000)\n",
+    "# pour voir à quoi ressemble x:\n",
+    "x[0:10]\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# La fonction image(t) lit un tableau et renvoi le tableau des images :\n",
+    "\n",
+    "def image(t):\n",
+    "    y=[]\n",
+    "    for i in t:\n",
+    "        #compléter ici\n",
+    "    return np.array(y)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Avec cette fonction, on crée un tableau contenant les images \n",
+    "y=\n",
+    "# pour voir à quoi ressemble y :\n",
+    "y[0:10]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#cherchez dans la doc de matplotlib ce que font les lignes de code  suivantes \n",
+    "# et modifiez les pour dessiner la fonction sin(x) entre -2pi et +2pi\n",
+    "plt.grid()\n",
+    "plt.xlim(0,10)\n",
+    "plt.ylim(-10,10)\n",
+    "plt.title(\"La fonction 100*sin(x)\")\n",
+    "plt.plot(x,y)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# on veut maintenant tracer cette même courbe mais en tenant compte de la dynamique du datalogger.\n",
+    "# chaque valeurs est codée avec un pas calculé par notre fonction mnval.\n",
+    "# par exemple, en 16 bit, le pas est de :\n",
+    "minval(200,16)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# on defini une fonction sinus(x) qui donne la valeur de sin(x) arrondie par le datalogger:\n",
+    "def sinus(x,step):\n",
+    "    valVraie=m.sin(x) #c'est la valeur vraie, du moins... avec la dynamique de notre python...\n",
+    "    return ... calcule la valeur avec l'arondi..."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# affichons quelques valeurs comparées et sinus(x) et m.sin(x)\n",
+    "# si minval est de 0.1 -  u prend x entre 1. et 1.5\n",
+    "for i in range(100,151):\n",
+    "    v=i/100\n",
+    "    print(\"x=\",v,\"sin(x)=\",m.sin(v),\"arrodi à 0.1 près: \",sinus(v,0.1),\"erreur = \",abs(sinus(v,0.1)-m.sin(v)))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Quelle semble être l'erreur d'arrondi maximale ?\n",
+    "Est-ce logique ? Quelle est l'erreur maximale théorique ?"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# on crée une seconde fonction image, qui renvoi le tableau des images par la fonction sinus\n",
+    "# cette fonction doit tenir compte de minval\n",
+    "\n",
+    "def image2(t,minval):\n",
+    "   \n",
+    "        (... complétez...)\n",
+    "    return np.array(y)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# on va créer un tableau d'image de notre tableau x par la fonction sinus et le dessiner :\n",
+    "y1=image2(x,0.1)\n",
+    "plt.grid()\n",
+    "plt.xlim(-2*m.pi,2*m.pi)\n",
+    "plt.ylim(-102,102)\n",
+    "plt.title(\"La fonction 100*sin(x)\")\n",
+    "plt.plot(x,y)\n",
+    "plt.plot(x,y1)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "L'arrondi à 0.1 près déforme-t-il la courbe ?"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Tracez comme ci-dessus la courbe de 100*sin(x) et celle que l'on va obtenir \n",
+    "# avec une dynamique de 16 bit"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "y1=image2(... completez...)\n",
+    "plt.grid()\n",
+    "plt.xlim(-2*m.pi,2*m.pi)\n",
+    "plt.ylim(-102,102)\n",
+    "plt.title(\"La fonction 100*sin(x) en 16 bits\")\n",
+    "plt.plot(x,y)\n",
+    "plt.plot(x,y1)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# faire de même avec un débit binaire de 8 bits\n",
+    "y1=image2(x,minval(200,8))\n",
+    "plt.grid()\n",
+    "plt.xlim(-2*m.pi,2*m.pi)\n",
+    "plt.ylim(-102,102)\n",
+    "plt.title(\"La fonction 100*sin(x) en 8 bits\")\n",
+    "plt.plot(x,y)\n",
+    "plt.plot(x,y1)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "La digitalisation en 16 bits déforme-t-elle la courbe ? en 8 bits ?"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# refaire la figure précédente en 16 bits mais en changeant les bornes du dessin\n",
+    "# on prendra ymin=96 et ymax=102\n",
+    "# et pour x entre 1.4 et 1.7\n",
+    "y1=image2(x,minval(200,16))\n",
+    "plt.grid()\n",
+    "plt.xlim(1.3,1.7)\n",
+    "plt.ylim(96,102)\n",
+    "plt.title(\"La fonction 100*sin(x) en 16 bits\")\n",
+    "plt.plot(x,y)\n",
+    "plt.plot(x,y1)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Quelles conclusions tirez vous de ce TP ?"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.7.3"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
